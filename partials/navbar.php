@@ -11,7 +11,7 @@
                     <li><a href="products.php">PRODUCTOS</a></li>
                     <li><a href="contact.php">CONTACTANOS</a></li>
                     <li><a href="blog.php">BLOG</a></li>
-                    <li><a href="login.php">INICIAR SESION</a></li>
+                    <li><a href="dashboard/login.php">INICIAR SESION</a></li>
                 </ul>
             </div>
         </div>
