@@ -21,8 +21,10 @@ CREATE TABLE `products` (
   `fecha_regis` date,
   `estado` int(10),
   `img` MEDIUMBLOB,
+  `tipo_imagen` varchar(30),
   PRIMARY KEY (`id`)
 );
+
 
 CREATE TABLE `users` (
   `id` int AUTO_INCREMENT,
