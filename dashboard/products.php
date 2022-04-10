@@ -1,10 +1,11 @@
 <?php
-// session_start();
 
-// if (!isset($_SESSION["user"])) {
-//    header("Location: index.php");
-// return;
-// }
+session_start();
+
+if (!isset($_SESSION["user"])) {
+    header("Location: index.php");
+    return;
+}
 
 require 'scripts/db.php';
 
@@ -41,21 +42,27 @@ $productos = $conn->query("SELECT * FROM products WHERE estado = 1");
                                 <thead>
                                     <tr>
                                         <th>ID</th>
+                                        <th>CODIGO</th>
                                         <th>NOMBRE</th>
-                                        <th>CORREO</th>
-                                        <th>CONTRASEÑA</th>
-                                        <th>FECHA REGISTRO</th>
+                                        <th>DESCRIPCION</th>
                                         <th>TIPO</th>
+                                        <th>PRECIO</th>
+                                        <th>CANTIDAD</th>
+                                        <th>FECHA</th>
+                                        <th>IMAGEN</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
                                         <th>ID</th>
+                                        <th>CODIGO</th>
                                         <th>NOMBRE</th>
-                                        <th>CORREO</th>
-                                        <th>CONTRASEÑA</th>
-                                        <th>FECHA REGISTRO</th>
+                                        <th>DESCRIPCION</th>
                                         <th>TIPO</th>
+                                        <th>PRECIO</th>
+                                        <th>CANTIDAD</th>
+                                        <th>FECHA</th>
+                                        <th>IMAGEN</th>
                                     </tr>
                                 </tfoot>
                                 <tbody> <?php foreach ($productos as $producto) : ?>
@@ -67,8 +74,7 @@ $productos = $conn->query("SELECT * FROM products WHERE estado = 1");
                                             <td><?= $producto['tipo'] ?></td>
                                             <td><?= $producto['precio'] ?></td>
                                             <td><?= $producto['cantidad'] ?></td>
-                                            <td><?= $producto['fecha'] ?></td>
-                                            <td><?= $producto['estado'] ?></td>
+                                            <td><?= $producto['fecha_regis'] ?></td>
                                             <td><?= $producto['img'] ?></td>
                                         </tr>
                                     <?php endforeach ?>

@@ -64,117 +64,35 @@
         </div>
     </section><!-- /.section-services -->
 
-    <section class="site-section section-map-feature text-center">
+    <section class="site-section section-services text-center">
 
-        <div class="container">
-            <h2>Responsive Web Design</h2>
-            <p>Web design is responsive design. Responsive web design is web design, done right.</p>
-            <a href="#" class="btn btn-fill">Learn More</a>
-            <div class="row">
-                <div class="col-sm-3 col-xs-6">
-                    <div class="counter-item">
-                        <p class="counter" data-to="377" data-speed="2000">0</p>
-                        <h3>Cofee Cups</h3>
-                    </div><!-- /.counter-item -->
+        <div id="carouselExampleIndicators" class="carousel slide container" data-bs-ride="carousel" >
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="..." class="d-block w-100" alt="...">
                 </div>
-                <div class="col-sm-3 col-xs-6">
-                    <div class="counter-item">
-                        <p class="counter" data-to="1204" data-speed="2000">0</p>
-                        <h3>Projects completed</h3>
-                    </div> <!-- /.counter-item -->
+                <div class="carousel-item">
+                    <img src="..." class="d-block w-100" alt="...">
                 </div>
-                <div class="col-sm-3 col-xs-6">
-                    <div class="counter-item">
-                        <p class="counter" data-to="459" data-speed="1000">0</p>
-                        <h3>Happy Clients</h3>
-                    </div><!-- /.counter-item -->
-                </div>
-                <div class="col-sm-3 col-xs-6">
-                    <div class="counter-item">
-                        <p class="counter" data-to="675" data-speed="1000">0</p>
-                        <h3>Average Deal</h3>
-                    </div><!-- /.counter-item -->
+                <div class="carousel-item">
+                    <img src="..." class="d-block w-100" alt="...">
                 </div>
             </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Anterior </span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Siguiente</span>
+            </button>
         </div>
 
     </section><!-- /.section-map-feature -->
-
-    <section class="site-section section-portfolio">
-        <div class="container">
-            <div class="text-center">
-                <h2 class="heading-separator">Latest Work</h2>
-                <p class="subheading-text">This is some of our best work</p>
-            </div>
-            <div class="row">
-                <div class="col-lg-3 col-md-4 col-xs-6">
-                    <div class="portfolio-item">
-                        <img src="assets/img/portfolio-1.jpg" class="img-res" alt="">
-                        <h4 class="portfolio-item-title">Portfolio item</h4>
-                        <a href="portfolio-item.html"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
-                    </div><!-- /.portfolio-item -->
-                </div>
-                <div class="col-lg-3 col-md-4 col-xs-6">
-                    <div class="portfolio-item">
-                        <img src="assets/img/portfolio-2.jpg" class="img-res" alt="">
-                        <h4 class="portfolio-item-title">Portfolio item</h4>
-                        <a href="portfolio-item.html"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
-                    </div><!-- /.portfolio-item -->
-                </div>
-                <div class="col-lg-3 col-md-4 col-xs-6">
-                    <div class="portfolio-item">
-                        <img src="assets/img/portfolio-3.jpg" class="img-res" alt="">
-                        <h4 class="portfolio-item-title">Portfolio item</h4>
-                        <a href="portfolio-item.html"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
-                    </div><!-- /.portfolio-item -->
-                </div>
-                <div class="col-lg-3 col-md-4 col-xs-6">
-                    <div class="portfolio-item">
-                        <img src="assets/img/portfolio-4.jpg" class="img-res" alt="">
-                        <h4 class="portfolio-item-title">Portfolio item</h4>
-                        <a href="portfolio-item.html"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
-                    </div><!-- /.portfolio-item -->
-                </div>
-                <div class="col-lg-3 col-md-4 col-xs-6">
-                    <div class="portfolio-item">
-                        <img src="assets/img/portfolio-5.jpg" class="img-res" alt="">
-                        <h4 class="portfolio-item-title">Portfolio item</h4>
-                        <a href="portfolio-item.html"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
-                    </div><!-- /.portfolio-item -->
-                </div>
-                <div class="col-lg-3 col-md-4 col-xs-6">
-                    <div class="portfolio-item">
-                        <img src="assets/img/portfolio-6.jpg" class="img-res" alt="">
-                        <h4 class="portfolio-item-title">Portfolio item</h4>
-                        <a href="portfolio-item.html"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
-                    </div><!-- /.portfolio-item -->
-                </div>
-                <div class="col-lg-3 col-md-4 col-xs-6">
-                    <div class="portfolio-item">
-                        <img src="assets/img/portfolio-1.jpg" class="img-res" alt="">
-                        <h4 class="portfolio-item-title">Portfolio item</h4>
-                        <a href="portfolio-item.html"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
-                    </div><!-- /.portfolio-item -->
-                </div>
-                <div class="col-lg-3 col-md-4 col-xs-6">
-                    <div class="portfolio-item">
-                        <img src="assets/img/portfolio-2.jpg" class="img-res" alt="">
-                        <h4 class="portfolio-item-title">Portfolio item</h4>
-                        <a href="portfolio-item.html"><i class="fa fa-arrow-right" aria-hidden="true"></i></a>
-                    </div><!-- /.portfolio-item -->
-                </div>
-            </div>
-        </div>
-    </section><!-- /.section-portfolio -->
-
-    <section class="site-section section-newsletter text-center">
-        <div class="container">
-            <h2>Subscribe our newsletters</h2>
-            <form class="form-group newsletter-group">
-                <input type="email" class="form-control" placeholder="Your e-mail" required>
-                <button class="btn btn-green" type="button">Subscribe</button>
-            </form><!-- /.newsletter-group -->
-        </div>
-    </section><!-- /.section-newsletter -->
 
     <?php require "partials/footer.php" ?>

@@ -6,6 +6,7 @@ CREATE TABLE `services` (
   `id` int AUTO_INCREMENT,
   `name_serv` varchar(255),
   `description` varchar(1000),
+  `estado` int(20),
   `img` MEDIUMBLOB,
   PRIMARY KEY (`id`)
 );
@@ -45,6 +46,7 @@ CREATE TABLE `article` (
   `date` date,
   `sub_title` varchar(255),
   `sub_text` varchar(5000),
+  `estado` int(20),
   `img` MEDIUMBLOB,
   PRIMARY KEY (`id`)
 );

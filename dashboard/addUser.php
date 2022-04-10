@@ -1,5 +1,11 @@
 <?php
 /* guarda el nuevo usuario */
+session_start();
+
+if (!isset($_SESSION["user"])) {
+         header("Location: index.php");
+     return;
+ }
 require 'scripts/db.php';
 $error = null;
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -22,9 +28,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 					":name" => $_POST["name"],
 					":email" => $_POST["email"],
 					":password" => password_hash($_POST["password"], PASSWORD_BCRYPT),
-					":fecha" => $_POST["fecha_registro"],
+					":fecha" => $_POST["date"],
 					":tipo" => $_POST["tipo"]
 				]);
+
+            
 
 			$statement = $conn->prepare("SELECT * FROM users WHERE email = :email LIMIT 1");
 			$statement->bindParam(":email", $_POST["email"]);
@@ -33,6 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 			$_SESSION["user"] = $user;
 
+            $_SESSION["flash"] = ["message" => "Nuevo Usuario {$_POST['name']} Agregado."];
 			header("Location: users.php");
 		}
 	}
@@ -64,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <input type="password" class="form-control form-control-user" name="password" id="password" placeholder="Password">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control form-control-user" name="date" id="date" placeholder="Fecha de Regsitro">
+                                <input type="date" class="form-control form-control-user" name="date" id="date" placeholder="Fecha de Regsitro">
                             </div>
 
                             <div class="form-group">

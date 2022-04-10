@@ -1,11 +1,11 @@
 <?php
 require "scripts/db.php";
 
-// session_start();
-// if (!isset($_SESSION["user"])) {
-// 	header("Location: index.php");
-// 	return;
-// }
+ session_start();
+ if (!isset($_SESSION["user"])) {
+ 	header("Location: index.php");
+ 	return;
+ }
 
 $error = null;
 
@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             $carpeta_destino = "fotos/";
             $tmp_name = $_FILES['foto']['tmp_name'];
-            $archivo_subido = $carpeta_destino . $_FILES['foto']['name'];
+            $archivo_subido = $carpeta_destino.$_FILES['foto']['name'];
             copy($tmp_name, $archivo_subido);
 
 
@@ -42,6 +42,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 ":fecha" => $_POST["datepro"],
                 ":imagen" => $_FILES['foto']['name']
             ));
+
+            $_SESSION["flash"] = ["message" => "Producto {$_POST['nameproduct']} Agregado."];
             header("Location: products.php");
             return;
         }

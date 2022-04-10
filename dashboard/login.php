@@ -1,3 +1,40 @@
+<?php
+
+  require 'scripts/db.php';
+
+  $error = null;
+
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (empty($_POST["email"]) || empty($_POST["password"])) {
+      $error = "Please fill all the fileds.";
+    } else if (!str_contains($_POST["email"], "@")) {
+      $error = "Email format is incorrect.";
+    } else {
+      $statement = $conn->prepare("SELECT * FROM users WHERE email = :email LIMIT 1");
+      $statement->bindParam(":email", $_POST["email"]);
+      $statement->execute();
+
+      if ($statement->rowCount() == 0) {
+        $error = "Invalid credentials.";
+      } else {
+        $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if (!password_verify($_POST["password"], $user["password"])) {
+          $error = "Invalid credentials.";
+        } else {
+          session_start();
+
+          unset($user["password"]);
+
+          $_SESSION["user"] = $user;
+
+          header("Location: index.php");
+        }
+      }
+    }
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -36,15 +73,15 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Vienvenido</h1>
                                     </div>
-                                    <form class="user">
+                                    <form class="user" method="POST" action="login.php">
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp"
+                                                id="email" name="email" aria-describedby="emailHelp"
                                                 placeholder="Enter Email Address...">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Password">
+                                                id="password" name="password">
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
@@ -53,11 +90,9 @@
                                                     Me</label>
                                             </div>
                                         </div>
-                                        <a href="index.html" class="btn btn-primary btn-user btn-block">
-                                            Login
-                                        </a>
+                                        <button type="submit" class="btn btn-primary btn-user btn-block">Login</button>
                                         <hr>
-                                        <a href="index.html" class="btn btn-primary btn-user btn-block">
+                                        <a href="/webceron/index.php" class="btn btn-primary btn-user btn-block">
                                             Regresar
                                         </a>
                                     </form>

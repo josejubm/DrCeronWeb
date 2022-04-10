@@ -3,10 +3,10 @@
     <div id="hero" class="hero overlay subpage-hero contact-hero">
         <div class="hero-content">
             <div class="hero-text">
-                <h1>Contact</h1>
+                <h1>Contactanos</h1>
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Contact</li>
+                    <li class="breadcrumb-item active">Contactanos</li>
                 </ol>
             </div><!-- /.hero-text -->
         </div><!-- /.hero-content -->

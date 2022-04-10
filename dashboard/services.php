@@ -1,3 +1,16 @@
+<?php
+ session_start();
+
+ if (!isset($_SESSION["user"])) {
+    header("Location: index.php");
+ return;
+ }
+
+require 'scripts/db.php';
+
+$servicios = $conn->query("SELECT * FROM services WHERE estado = 1");
+
+?>
 
 <?php include "utils/header.php" ?>
 
@@ -14,8 +27,8 @@
             <div class="container-fluid">
 
                 <!-- Page Heading -->
-                <h1 class="h3 mb-2 text-gray-800">Produtos</h1>
-                <p class="mb-4">Tabla de los productos</p>
+                <h1 class="h3 mb-2 text-gray-800">Productos</h1>
+                <p class="mb-4">Tabla de los Productos</p>
 
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
@@ -27,41 +40,28 @@
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Position</th>
-                                        <th>Office</th>
-                                        <th>Age</th>
-                                        <th>Start date</th>
-                                        <th>Salary</th>
+                                        <th>ID</th>
+                                        <th>NOMBRE</th>
+                                        <th>DESCRIPCION</th>
+                                        <th>IMAGEN</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Position</th>
-                                        <th>Office</th>
-                                        <th>Age</th>
-                                        <th>Start date</th>
-                                        <th>Salary</th>
+                                        <th>ID</th>
+                                        <th>NOMBRE</th>
+                                        <th>DESCRIPCION</th>
+                                        <th>IMAGEN</th>
                                     </tr>
                                 </tfoot>
-                                <tbody>
-                                    <tr>
-                                        <td>Tiger Nixon</td>
-                                        <td>System Architect</td>
-                                        <td>Edinburgh</td>
-                                        <td>61</td>
-                                        <td>2011/04/25</td>
-                                        <td>$320,800</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Garrett Winters</td>
-                                        <td>Accountant</td>
-                                        <td>Tokyo</td>
-                                        <td>63</td>
-                                        <td>2011/07/25</td>
-                                        <td>$170,750</td>
-                                    </tr>
+                                <tbody> <?php foreach ($servicios as $servicio) : ?>
+                                        <tr>
+                                            <td><?= $servicio['id'] ?></td>
+                                            <td><?= $servicio['name_serv'] ?></td>
+                                            <td><?= $servicio['description'] ?></td>
+                                            <td><?= $servicio['img'] ?></td>
+                                        </tr>
+                                    <?php endforeach ?>
                                 </tbody>
                             </table>
                         </div>
@@ -70,4 +70,4 @@
 
             </div>
             <!-- /.container-fluid -->
-<?php include "utils/footer.php" ?>
+            <?php include "utils/footer.php" ?>

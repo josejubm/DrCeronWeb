@@ -1,10 +1,10 @@
 <?php
-// session_start();
+ session_start();
 
-// if (!isset($_SESSION["user"])) {
-//    header("Location: index.php");
-// return;
-// }
+if (!isset($_SESSION["user"])) {
+         header("Location: index.php");
+     return;
+ }
 
 require 'scripts/db.php';
 
