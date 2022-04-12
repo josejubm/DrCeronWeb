@@ -1,22 +1,33 @@
 <?php
 require "scripts/db.php";
+session_start();
+if (!isset($_SESSION["user"])) {
+    header("Location: login.php");
+    return;
+}
 
- session_start();
- if (!isset($_SESSION["user"])) {
- 	header("Location: index.php");
- 	return;
- }
+$id = $_GET["id"];
+
+$statement = $conn->prepare("SELECT * FROM products WHERE id = :id LIMIT 1");
+$statement->execute([":id" => $id]);
+
+if ($statement->rowCount() == 0) {
+    http_response_code(404);
+    header("Location: 404.php");
+    echo ("HTTP 404 NOT FOUND");
+    return;
+}
+
+$producto = $statement->fetch(PDO::FETCH_ASSOC);
 
 $error = null;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
     if (
         empty($_POST["codigo"]) || empty($_POST["nameproduct"]) ||
         empty($_POST["description"]) || empty($_POST["tipo"]) ||
         empty($_POST["precio"]) || empty($_POST["cantidad"]) ||
-        empty($_POST["datepro"]) || empty($_FILES["foto"]["name"])
-    ) {
+        empty($_POST["datepro"])) {
         $error = "Please fill all the fields.";
     } else {
 
@@ -25,13 +36,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             $carpeta_destino = "fotos/";
             $tmp_name = $_FILES['foto']['tmp_name'];
-            $archivo_subido = $carpeta_destino.$_FILES['foto']['name'];
+            $archivo_subido = $carpeta_destino . $_FILES['foto']['name'];
             copy($tmp_name, $archivo_subido);
 
-
-            $statement = $conn->prepare("INSERT INTO products (codigo_pro, nombre_pro, descripccion, tipo, precio, cantidad, fecha_regis, estado, img)
-         VALUES (:codigo, :nombre, :descripcion, :tipo, :precio, :cantidad, :fecha, :status, :imagen);");
+            $statement = $conn->prepare("UPDATE products SET codigo_pro = :codigo, nombre_pro = :nombre , descripccion =:descripcion, tipo= :tipo, precio =:precio , cantidad =:cantidad , fecha_regis = :fecha, estado = :status, img = :imagen WHERE id = :id ");
             $statement->execute(array(
+                ":id" => $id,
                 ":status" => $status = 1,
                 ":codigo" => $_POST["codigo"],
                 ":nombre" => $_POST["nameproduct"],
@@ -43,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 ":imagen" => $_FILES['foto']['name']
             ));
 
-            $_SESSION["flash"] = ["message" => "Producto {$_POST['nameproduct']} Agregado."];
+            $_SESSION["flash3"] = ["message" => "Producto {$_POST['nameproduct']} Editado."];
             header("Location: products.php");
             return;
         }
@@ -63,29 +73,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="col-lg-7 container">
                     <div class="p-5">
                         <div class="text-center">
-                            <h1 class="h4 text-gray-900 mb-4">Nuevo Producto</h1>
+                            <h1 class="h4 text-gray-900 mb-4">Editar Producto</h1>
                         </div>
-                        <form id="registerUser" enctype="multipart/form-data" name="registerUser" class="user" method="POST" action="addProduct.php">
+                        <form id="registerUser" enctype="multipart/form-data" name="registerUser" class="user" method="POST" action="editProduct.php?id=<?= $producto['id'] ?>">
                             <div class="form-group">
-                                <input type="text" class="form-control form-control-user" id="codigo" name="codigo" placeholder="codigo de producto">
+                                <input value="<?= $producto['codigo_pro'] ?>" type="text" class="form-control form-control-user" id="codigo" name="codigo" placeholder="codigo de producto">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control form-control-user" id="nameproduct" name="nameproduct" placeholder="Nombre Del Producto">
+                                <input value="<?= $producto['nombre_pro'] ?>" type="text" class="form-control form-control-user" id="nameproduct" name="nameproduct" placeholder="Nombre Del Producto">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control form-control-user" name="description" id="description" placeholder="Descrpcion del producto">
+                                <input value="<?= $producto['descripccion'] ?>" type="text" class="form-control form-control-user" name="description" id="description" placeholder="Descrpcion del producto">
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <input type="number" class="form-control form-control-user" id="precio" name="precio" placeholder="Precio ">
+                                    <input value="<?= $producto['precio'] ?>" type="number" class="form-control form-control-user" id="precio" name="precio" placeholder="Precio ">
                                 </div>
                                 <div class="col-sm-6">
-                                    <input type="number" class="form-control form-control-user" id="cantidad" name="cantidad" placeholder="Cantidad">
+                                    <input value="<?= $producto['cantidad'] ?>" type="number" class="form-control form-control-user" id="cantidad" name="cantidad" placeholder="Cantidad">
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <input type="date" class="form-control form-control-user" name="datepro" id="datepro" placeholder="Fecha de Regsitro">
+                                <input value="<?= $producto['fecha_regis'] ?>" type="date" class="form-control form-control-user" name="datepro" id="datepro" placeholder="Fecha de Regsitro">
                             </div>
                             <div class="form-group">
                                 <input type="file" class="form-control form-control-user" name="foto" id="foto" placeholder="imagen">
@@ -102,7 +112,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <span class="icon text-white-50">
                                     <i class="fas fa-check"></i>
                                 </span>
-                                <span class="text">GUARDAR NUEVO</span>
+                                <span class="text">GUARDAR EDITADO</span>
                             </button>
                             <a href="products.php" class="btn btn-warning btn-user btn-block">
                                 <span class="icon text-white-50">

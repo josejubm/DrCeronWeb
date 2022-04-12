@@ -1,10 +1,10 @@
 <?php
- session_start();
+session_start();
 
 if (!isset($_SESSION["user"])) {
-         header("Location: index.php");
-     return;
- }
+    header("Location: index.php");
+    return;
+}
 
 require 'scripts/db.php';
 
@@ -40,6 +40,8 @@ $usuarios = $conn->query("SELECT * FROM users WHERE status = 1");
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
+                                        <th></th>
+                                        <th></th>
                                         <th>ID</th>
                                         <th>NOMBRE</th>
                                         <th>CORREO</th>
@@ -50,6 +52,8 @@ $usuarios = $conn->query("SELECT * FROM users WHERE status = 1");
                                 </thead>
                                 <tfoot>
                                     <tr>
+                                        <th></th>
+                                        <th></th>
                                         <th>ID</th>
                                         <th>NOMBRE</th>
                                         <th>CORREO</th>
@@ -60,6 +64,24 @@ $usuarios = $conn->query("SELECT * FROM users WHERE status = 1");
                                 </tfoot>
                                 <tbody> <?php foreach ($usuarios as $user) : ?>
                                         <tr>
+                                        <tr>
+
+                                            <td>
+                                                <a href="deleteUser.php?id=<?= $user["id"] ?>" class="btn btn-danger btn-user btn-block">
+                                                    <span class="icon text-white-50">
+                                                        <i class="fa-solid fa-trash"></i>
+                                                    </span>
+                                                    <span>Eliminar</span>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a href="editUser.php?id=<?= $user["id"] ?>" class="btn btn-warning btn-user btn-block">
+                                                    <span class="icon text-white-50">
+                                                        <i class="fa-solid fa-pen"></i>
+                                                    </span>
+                                                    <span>Editar</span>
+                                                </a>
+                                            </td>
                                             <td><?= $user['id'] ?></td>
                                             <td><?= $user['name'] ?></td>
                                             <td><?= $user['email'] ?></td>
@@ -76,4 +98,6 @@ $usuarios = $conn->query("SELECT * FROM users WHERE status = 1");
 
             </div>
             <!-- /.container-fluid -->
+
+
             <?php include "utils/footer.php" ?>

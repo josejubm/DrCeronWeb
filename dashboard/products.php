@@ -41,6 +41,8 @@ $productos = $conn->query("SELECT * FROM products WHERE estado = 1");
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
+                                        <th>---</th>
+                                        <th>---</th>
                                         <th>ID</th>
                                         <th>CODIGO</th>
                                         <th>NOMBRE</th>
@@ -54,6 +56,8 @@ $productos = $conn->query("SELECT * FROM products WHERE estado = 1");
                                 </thead>
                                 <tfoot>
                                     <tr>
+                                        <th>---</th>
+                                        <th>---</th>
                                         <th>ID</th>
                                         <th>CODIGO</th>
                                         <th>NOMBRE</th>
@@ -67,6 +71,22 @@ $productos = $conn->query("SELECT * FROM products WHERE estado = 1");
                                 </tfoot>
                                 <tbody> <?php foreach ($productos as $producto) : ?>
                                         <tr>
+                                            <td>
+                                                <a href="deleteProduct.php?id=<?= $producto["id"] ?>" class="btn btn-danger btn-user btn-block">
+                                                    <span class="icon text-white-50">
+                                                        <i class="fa-solid fa-trash"></i>
+                                                    </span>
+                                                    <span>Eliminar</span>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a href="editProduct.php?id=<?= $producto["id"] ?>" class="btn btn-warning btn-user btn-block">
+                                                    <span class="icon text-white-50">
+                                                        <i class="fa-solid fa-pen"></i>
+                                                    </span>
+                                                    <span>Editar</span>
+                                                </a>
+                                            </td>
                                             <td><?= $producto['id'] ?></td>
                                             <td><?= $producto['codigo_pro'] ?></td>
                                             <td><?= $producto['nombre_pro'] ?></td>
@@ -86,4 +106,5 @@ $productos = $conn->query("SELECT * FROM products WHERE estado = 1");
 
             </div>
             <!-- /.container-fluid -->
+            
             <?php include "utils/footer.php" ?>
