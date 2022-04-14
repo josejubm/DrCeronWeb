@@ -1,3 +1,5 @@
+
+
 <?php require "partials/header.php" ?>
 
     <div id="hero" class="hero overlay subpage-hero contact-hero">
@@ -5,8 +7,8 @@
             <div class="hero-text">
                 <h1>Contactanos</h1>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Contactanos</li>
+                    <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+                    <li class="breadcrumb-item active" href="contact.php" >Contactanos</li>
                 </ol>
             </div><!-- /.hero-text -->
         </div><!-- /.hero-content -->
@@ -20,11 +22,11 @@
                 <div class="row">
                     <div class="col-sm-7">
                         <h2>Envia un Mensaje</h2>
-                        <form>
+                        <form action="contact.php" method="POST">
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label for="name">Name:</label>
+                                        <label for="name">Nombre:</label>
                                         <input type="text" class="form-control" id="name">
                                     </div>
                                 </div>
@@ -40,7 +42,7 @@
                                 <input class="form-control" id="subject"></input>
                             </div>
                             <div class="form-group">
-                                <label for="message">Message:</label>
+                                <label for="message">Mensaje:</label>
                                 <textarea class="form-control form-control-comment" id="message"></textarea>
                             </div>
                             <div class="text-center">
@@ -71,6 +73,5 @@
 
         </section><!-- /.section-contact-us -->
 
-        <section id="map" class="section-map"></section><!-- /.section-map -->
 
         <?php require "partials/footer.php" ?>

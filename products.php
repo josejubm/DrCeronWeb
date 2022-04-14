@@ -38,7 +38,7 @@ $products = $conn->query("SELECT * FROM products WHERE estado = 1");
 
                 <div class="col-lg-3 col-md-4 col-xs-6" data-groups='["<?= $product['tipo'] ?>"]'>
                     <div class="portfolio-item">
-                        <img src="assets/img/portfolio-1.jpg" class="img-res" alt="">
+                        <img src="dashboard/imagesProducts/<?= $product['img'] ?>" class="img-res" alt="">
                         <h4 class="portfolio-item-title"><?= $product['nombre_pro'] ?></h4>
                         <a href="product.php?id=<?= $product["id"] ?>">Saber Mas<i class="fa fa-arrow-right" aria-hidden="true"></i></a>
                     </div><!-- /.portfolio-item -->

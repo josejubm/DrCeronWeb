@@ -1,3 +1,11 @@
+<?php
+
+require 'dashboard/scripts/db.php';
+
+$servicios = $conn->query("SELECT * FROM services WHERE estado = 1");
+
+?>
+
 <?php require "partials/header.php" ?>
 
     <div id="hero" class="hero overlay subpage-hero portfolio-hero">
@@ -13,22 +21,25 @@
     </div><!-- /.hero -->
 
     <main id="main" class="site-main">
+
+    <?php foreach ($servicios as $servicio) : ?>
     <section class="site-section section-features">
         <div class="container">
             <div class="row">
                 <div class="col-sm-5">
-                    <h2> </h2>
-                    <p> </p>
+                    <h2> <?= $servicio['name_serv'] ?> </h2>
                     <div class="testimonial-author">
-                        <center>Dr. Arturo Cerón Martínez</center>
+                    <?= $servicio['description'] ?>  
                     </div>
 
                 </div>
                 <div class="col-sm-7 hidden-xs">
-                    <img src="assets/images/img-ds.jpg" alt="">
+                    <img src="dashboard/imagesServices/<?= $servicio['img'] ?>" alt="">
                 </div>
             </div>
         </div>
     </section><!-- /.section-features -->
+
+    <?php endforeach ?>
 
 <?php require "partials/footer.php" ?>

@@ -37,16 +37,3 @@ CREATE TABLE `users` (
   `status` int(20),
   PRIMARY KEY (`id`)
 );
-
-CREATE TABLE `article` (
-  `id` int AUTO_INCREMENT,
-  `title` varchar(255),
-  `text` varchar(5000),
-  `autor` varchar(255),
-  `date` date,
-  `sub_title` varchar(255),
-  `sub_text` varchar(5000),
-  `estado` int(20),
-  `img` MEDIUMBLOB,
-  PRIMARY KEY (`id`)
-);

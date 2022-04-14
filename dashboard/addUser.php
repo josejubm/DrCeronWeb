@@ -3,48 +3,49 @@
 session_start();
 
 if (!isset($_SESSION["user"])) {
-         header("Location: index.php");
-     return;
- }
+    header("Location: index.php");
+    return;
+}
+
 require 'scripts/db.php';
 $error = null;
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-	if (empty($_POST["name"]) || empty($_POST["email"]) || empty($_POST["password"]) || empty($_POST["date"]) || empty($_POST["tipo"])) {
-		$error = "Please fill all the fileds. ";
-	} else if (!str_contains($_POST["email"], "@")) {
-		$error = "Email Format Is Incorrect. ";
-	} else {
-		$statement = $conn->prepare("SELECT * FROM users WHERE email = :email ;");
-		$statement->bindParam(":email", $_POST["email"]);
-		$statement->execute();
+    if (empty($_POST["name"]) || empty($_POST["email"]) || empty($_POST["password"]) || empty($_POST["date"]) || empty($_POST["tipo"])) {
+        $error = "Please fill all the fileds. ";
+    } else if (!str_contains($_POST["email"], "@")) {
+        $error = "Email Format Is Incorrect. ";
+    } else {
+        $statement = $conn->prepare("SELECT * FROM users WHERE email = :email ;");
+        $statement->bindParam(":email", $_POST["email"]);
+        $statement->execute();
 
-		if ($statement->rowCount() > 0) {
-			$error = "This name is taken. ";
-		} else {
-			$conn
-				->prepare("INSERT INTO users (name, email, password, date_regis, tipe, status) VALUES (:name, :email, :password, :fecha, :tipo , 1)")
-				->execute([
-					":name" => $_POST["name"],
-					":email" => $_POST["email"],
-					":password" => password_hash($_POST["password"], PASSWORD_BCRYPT),
-					":fecha" => $_POST["date"],
-					":tipo" => $_POST["tipo"]
-				]);
+        if ($statement->rowCount() > 0) {
+            $error = "This name is taken. ";
+        } else {
+            $conn
+                ->prepare("INSERT INTO users (name, email, password, date_regis, tipe, status) VALUES (:name, :email, :password, :fecha, :tipo , 1)")
+                ->execute([
+                    ":name" => $_POST["name"],
+                    ":email" => $_POST["email"],
+                    ":password" => password_hash($_POST["password"], PASSWORD_BCRYPT),
+                    ":fecha" => $_POST["date"],
+                    ":tipo" => $_POST["tipo"]
+                ]);
 
-            
 
-			$statement = $conn->prepare("SELECT * FROM users WHERE email = :email LIMIT 1");
-			$statement->bindParam(":email", $_POST["email"]);
-			$statement->execute();
-			$user = $statement->fetch(PDO::FETCH_ASSOC);
 
-			$_SESSION["user"] = $user;
+            $statement = $conn->prepare("SELECT * FROM users WHERE email = :email LIMIT 1");
+            $statement->bindParam(":email", $_POST["email"]);
+            $statement->execute();
+            $user = $statement->fetch(PDO::FETCH_ASSOC);
+
+            $_SESSION["user"] = $user;
 
             $_SESSION["flash"] = ["message" => "Nuevo Usuario {$_POST['name']} Agregado."];
-			header("Location: users.php");
-		}
-	}
+            header("Location: users.php");
+        }
+    }
 }
 
 ?>

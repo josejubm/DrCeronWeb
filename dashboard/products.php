@@ -31,6 +31,8 @@ $productos = $conn->query("SELECT * FROM products WHERE estado = 1");
                 <h1 class="h3 mb-2 text-gray-800">Productos</h1>
                 <p class="mb-4">Tabla de los Productos</p>
 
+                <p class="mb-4">Nota: Los nombres de las imagenes tienen que ser diferentes.</p>
+
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">

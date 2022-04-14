@@ -3,9 +3,9 @@
 <div id="hero" class="hero overlay">
     <div class="hero-content">
         <div class="hero-text">
-            <h1>Your story begins from here.</h1>
-            <p>Your clients on the internet. Learn how to receive them.</p>
-            <a href="#" class="btn btn-border">Learn more</a>
+            <h1> Dr.Ceron</h1>
+            <p>VETERIANRIA DR CERON A SUS SERVICIOS</p>
+            <a href="contact.php" class="btn btn-border">Contactanos</a>
         </div><!-- /.hero-text -->
     </div><!-- /.hero-content -->
 </div><!-- /.hero -->
@@ -63,36 +63,5 @@
             </div>
         </div>
     </section><!-- /.section-services -->
-
-    <section class="site-section section-services text-center">
-
-        <div id="carouselExampleIndicators" class="carousel slide container" data-bs-ride="carousel" >
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-            </div>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="..." class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                    <img src="..." class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                    <img src="..." class="d-block w-100" alt="...">
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Anterior </span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Siguiente</span>
-            </button>
-        </div>
-
-    </section><!-- /.section-map-feature -->
-
+    
     <?php require "partials/footer.php" ?>

@@ -22,10 +22,9 @@
             <div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
                 <h3>ENLACES DESTACADOS</h3>
                 <ul class="list-unstyled">
-                    <li class="active"><a href="index.html">Home</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="portfolio.html">Porfolio</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li class="active"><a href="index.php">Home</a></li>
+                    <li><a href="services.php">Servicios</a></li>
+                    <li><a href="products.php">Productos</a></li>
                 </ul>
             </div>
         </div>

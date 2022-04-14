@@ -1,11 +1,11 @@
 <?php
 require "scripts/db.php";
 
- session_start();
- if (!isset($_SESSION["user"])) {
- 	header("Location: index.php");
- 	return;
- }
+session_start();
+if (!isset($_SESSION["user"])) {
+    header("Location: index.php");
+    return;
+}
 
 $error = null;
 
@@ -20,14 +20,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $error = "Please fill all the fields.";
     } else {
 
-        $check = @getimagesize($_FILES['foto']['tmp_name']);
-        if ($check !== false) {
+            $archivo = $_FILES['foto']['name'];
 
-            $carpeta_destino = "fotos/";
-            $tmp_name = $_FILES['foto']['tmp_name'];
-            $archivo_subido = $carpeta_destino.$_FILES['foto']['name'];
-            copy($tmp_name, $archivo_subido);
+            if (isset($archivo) && $archivo != "") {
 
+                $tipo = $_FILES['foto']['type'];
+                $tamano = $_FILES['foto']['size'];
+                $temp = $_FILES['foto']['tmp_name'];
+
+                //Se comprueba si el archivo a cargar es correcto observando su extensión y tamaño
+                if (!((strpos($tipo, "gif") || strpos($tipo, "jpeg") || strpos($tipo, "jpg") || strpos($tipo, "png")) && ($tamano < 2000000))) {
+                        $_SESSION["flash2"] = ["message" => "La extensión o el tamaño de los archivos no es correcta."];
+                } else {
+                    if (move_uploaded_file($temp, 'imagesProducts/' . $archivo)) {
+                        chmod('imagesProducts/' . $archivo, 0777);
+                    } else {
+                        $_SESSION["flash2"] = ["message" => "Ocurrió algún error al subir el fichero. No pudo guardarse."];
+                    }
+                 $_SESSION["flash"] = ["message" => "La imagen  {$_FILES['foto']['name']} se agrego ."];
+                }
+            }
 
             $statement = $conn->prepare("INSERT INTO products (codigo_pro, nombre_pro, descripccion, tipo, precio, cantidad, fecha_regis, estado, img)
          VALUES (:codigo, :nombre, :descripcion, :tipo, :precio, :cantidad, :fecha, :status, :imagen);");
@@ -47,7 +59,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: products.php");
             return;
         }
-    }
 }
 
 ?>
@@ -104,6 +115,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 </span>
                                 <span class="text">GUARDAR NUEVO</span>
                             </button>
+
                             <a href="products.php" class="btn btn-warning btn-user btn-block">
                                 <span class="icon text-white-50">
                                     <i class="fas fa-ban"></i>

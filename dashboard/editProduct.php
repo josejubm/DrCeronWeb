@@ -27,36 +27,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         empty($_POST["codigo"]) || empty($_POST["nameproduct"]) ||
         empty($_POST["description"]) || empty($_POST["tipo"]) ||
         empty($_POST["precio"]) || empty($_POST["cantidad"]) ||
-        empty($_POST["datepro"])) {
+        empty($_POST["datepro"])
+    ) {
         $error = "Please fill all the fields.";
     } else {
 
-        $check = @getimagesize($_FILES['foto']['tmp_name']);
-        if ($check !== false) {
+        $statement = $conn->prepare("UPDATE products SET codigo_pro = :codigo, nombre_pro = :nombre , descripccion =:descripcion, tipo= :tipo, precio =:precio , cantidad =:cantidad , fecha_regis = :fecha, estado = :status, img = :imagen WHERE id = :id ");
+        $statement->execute(array(
+            ":id" => $id,
+            ":status" => $status = 1,
+            ":codigo" => $_POST["codigo"],
+            ":nombre" => $_POST["nameproduct"],
+            ":descripcion" => $_POST["description"],
+            ":tipo" => $_POST["tipo"],
+            ":precio" => $_POST["precio"],
+            ":cantidad" => $_POST["cantidad"],
+            ":fecha" => $_POST["datepro"],
+            ":imagen" => $_FILES['foto']['name']
+        ));
 
-            $carpeta_destino = "fotos/";
-            $tmp_name = $_FILES['foto']['tmp_name'];
-            $archivo_subido = $carpeta_destino . $_FILES['foto']['name'];
-            copy($tmp_name, $archivo_subido);
-
-            $statement = $conn->prepare("UPDATE products SET codigo_pro = :codigo, nombre_pro = :nombre , descripccion =:descripcion, tipo= :tipo, precio =:precio , cantidad =:cantidad , fecha_regis = :fecha, estado = :status, img = :imagen WHERE id = :id ");
-            $statement->execute(array(
-                ":id" => $id,
-                ":status" => $status = 1,
-                ":codigo" => $_POST["codigo"],
-                ":nombre" => $_POST["nameproduct"],
-                ":descripcion" => $_POST["description"],
-                ":tipo" => $_POST["tipo"],
-                ":precio" => $_POST["precio"],
-                ":cantidad" => $_POST["cantidad"],
-                ":fecha" => $_POST["datepro"],
-                ":imagen" => $_FILES['foto']['name']
-            ));
-
-            $_SESSION["flash3"] = ["message" => "Producto {$_POST['nameproduct']} Editado."];
-            header("Location: products.php");
-            return;
-        }
+        $_SESSION["flash3"] = ["message" => "Producto {$_POST['nameproduct']} Editado."];
+        header("Location: products.php");
+        return;
     }
 }
 
@@ -96,9 +88,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                             <div class="form-group">
                                 <input value="<?= $producto['fecha_regis'] ?>" type="date" class="form-control form-control-user" name="datepro" id="datepro" placeholder="Fecha de Regsitro">
-                            </div>
-                            <div class="form-group">
-                                <input type="file" class="form-control form-control-user" name="foto" id="foto" placeholder="imagen">
                             </div>
                             <div class="form-group">
                                 <select id="tipo" name="tipo" class="form-control" placeholder="TIPO" required>

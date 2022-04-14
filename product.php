@@ -34,19 +34,27 @@ $products->execute([":id" => $id]);
                 <div class="row">
                     <div class="col-md-8">
                         <div class="project-img">
-                            <img src="assets/img/portfolio-1.jpg" class="img-res" alt="">
+                            <img src="dashboard/imagesProducts/<?= $product['img'] ?>" class="img-res" alt="">
                         </div><!-- /.project-img -->
 
                     </div>
                     <aside class="col-md-4">
                         <div class="project-info">
-                            <h5>Descripcion</h5>
-
+                           
+                            <h3><?= $product['nombre_pro'] ?></h3>
+                            <p></p>
+                            <h4>Descripción</h4>
                             <p class="project-description"> <?= $product['descripccion'] ?> </p>
 
                             <div class="project-date-category">
+
                                 <p><span>Fecha Publicacion:</span> <?= $product['fecha_regis'] ?></p>
+
                                 <p><span>Categoria:</span> <?= $product['tipo'] ?></p>
+
+                                <p><span>Precio en Tienda:</span> $ <?= $product['precio'] ?> </p>
+
+                                <p><span>Cantidad Disponible:</span> <?= $product['cantidad'] ?></p>
                             </div><!-- /.project-cat -->
 
                             <a href="contact.php" class="btn btn-gray">Reservar</a>

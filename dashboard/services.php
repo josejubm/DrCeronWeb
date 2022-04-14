@@ -1,10 +1,10 @@
 <?php
- session_start();
+session_start();
 
- if (!isset($_SESSION["user"])) {
+if (!isset($_SESSION["user"])) {
     header("Location: index.php");
- return;
- }
+    return;
+}
 
 require 'scripts/db.php';
 
@@ -27,8 +27,10 @@ $servicios = $conn->query("SELECT * FROM services WHERE estado = 1");
             <div class="container-fluid">
 
                 <!-- Page Heading -->
-                <h1 class="h3 mb-2 text-gray-800">Productos</h1>
+                <h1 class="h3 mb-2 text-gray-800">Servicios</h1>
                 <p class="mb-4">Tabla de los Productos</p>
+
+                <p class="mb-4">Nota: Los nombres de las imagenes Tienen que ser diferentes.</p>
 
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
@@ -40,6 +42,7 @@ $servicios = $conn->query("SELECT * FROM services WHERE estado = 1");
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
+                                        <th></th>
                                         <th>ID</th>
                                         <th>NOMBRE</th>
                                         <th>DESCRIPCION</th>
@@ -48,6 +51,7 @@ $servicios = $conn->query("SELECT * FROM services WHERE estado = 1");
                                 </thead>
                                 <tfoot>
                                     <tr>
+                                        <th></th>
                                         <th>ID</th>
                                         <th>NOMBRE</th>
                                         <th>DESCRIPCION</th>
@@ -56,6 +60,14 @@ $servicios = $conn->query("SELECT * FROM services WHERE estado = 1");
                                 </tfoot>
                                 <tbody> <?php foreach ($servicios as $servicio) : ?>
                                         <tr>
+                                            <td>
+                                                <a href="deleteService.php?id=<?= $servicio["id"] ?>" class="btn btn-danger btn-user btn-block">
+                                                    <span class="icon text-white-50">
+                                                        <i class="fa-solid fa-trash"></i>
+                                                    </span>
+                                                    <span>Eliminar</span>
+                                                </a>
+                                            </td>
                                             <td><?= $servicio['id'] ?></td>
                                             <td><?= $servicio['name_serv'] ?></td>
                                             <td><?= $servicio['description'] ?></td>

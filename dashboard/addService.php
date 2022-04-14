@@ -14,14 +14,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($_POST["nameserv"]) || empty($_POST["descriptionserv"])) {
         $error = "Please fill all the fields.";
     } else {
+        
+        $archivo = $_FILES['fotoService']['name'];
 
-        $check = @getimagesize($_FILES['foto']['tmp_name']);
-        if ($check !== false) {
+            if (isset($archivo) && $archivo != "") {
 
-            $carpeta_destino = "fotos/";
-            $tmp_name = $_FILES['foto']['tmp_name'];
-            $archivo_subido = $carpeta_destino . $_FILES['foto']['name'];
-            copy($tmp_name, $archivo_subido);
+                $tipo = $_FILES['fotoService']['type'];
+                $tamano = $_FILES['fotoService']['size'];
+                $temp = $_FILES['fotoService']['tmp_name'];
+
+                //Se comprueba si el archivo a cargar es correcto observando su extensión y tamaño
+                if (!((strpos($tipo, "gif") || strpos($tipo, "jpeg") || strpos($tipo, "jpg") || strpos($tipo, "png")) && ($tamano < 2000000))) {
+                        $_SESSION["flash2"] = ["message" => "La extensión o el tamaño de los archivos no es correcta."];
+                } else {
+                    if (move_uploaded_file($temp, 'imagesServices/' . $archivo)) {
+                        chmod('imagesServices/' . $archivo, 0777);
+                    } else {
+                        $_SESSION["flash2"] = ["message" => "Ocurrió algún error al subir el fichero. No pudo guardarse."];
+                    }
+                 $_SESSION["flash"] = ["message" => "La imagen  {$_FILES['fotoService']['name']} se agrego ."];
+                }
+            }
 
 
             $statement = $conn->prepare("INSERT INTO services (name_serv, description, estado, img)
@@ -30,14 +43,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 ":nombre" => $_POST["nameserv"],
                 ":descripcion" => $_POST["descriptionserv"],
                 ":status" => $status = 1,
-                ":imagen" => $_FILES['foto']['name']
+                ":imagen" => $_FILES['fotoService']['name']
             ));
 
             $_SESSION["flash"] = ["message" => "Servicio {$_POST['nameserv']} Agregado."];
 
             header("Location: services.php");
             return;
-        }
+        
     }
 }
 
@@ -65,7 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <textarea cols="30" rows="2" class="form-control form-control-user" name="descriptionserv" id="descriptionserv" placeholder="Descrpcion del Servicio"></textarea>
                             </div>
                             <div class="form-group">
-                                <input type="file" class="form-control form-control-user" name="foto" id="foto" placeholder="imagen">
+                                <input type="file" class="form-control form-control-user" name="fotoService" id="fotoService" placeholder="imagen">
                             </div>
 
                             <button class="btn btn-success btn-user btn-block" id="guarda" name="guarda" type="submit">
