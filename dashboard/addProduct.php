@@ -96,9 +96,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             </div>
 
                             <div class="form-group">
+                            <label for="">Fecha de registro</label>
                                 <input type="date" class="form-control form-control-user" name="datepro" id="datepro" placeholder="Fecha de Regsitro">
                             </div>
                             <div class="form-group">
+                                <label for="">Imagen del producto</label>
                                 <input type="file" class="form-control form-control-user" name="foto" id="foto" placeholder="imagen">
                             </div>
                             <div class="form-group">

@@ -46,7 +46,7 @@ $products = $conn->query("SELECT * FROM products WHERE estado = 1");
             <?php endforeach ?>
         </div>
         <div class="text-center">
-            <a class="btn btn-gray" href="#" id="loadMore">Load More</a>
+            <a class="btn btn-gray" href="#" id="loadMore">Ver Más</a>
         </div>
 
     </div>

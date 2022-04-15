@@ -78,6 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <textarea cols="30" rows="2" class="form-control form-control-user" name="descriptionserv" id="descriptionserv" placeholder="Descrpcion del Servicio"></textarea>
                             </div>
                             <div class="form-group">
+                            <label for="">Imagen del Servicio</label>
                                 <input type="file" class="form-control form-control-user" name="fotoService" id="fotoService" placeholder="imagen">
                             </div>
 

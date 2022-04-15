@@ -12,7 +12,7 @@
                 <h3>MANTENERSE EN CONTACTO</h3>
                 <ul class="list-unstyled contact-links">
                     <li><i class="fa fa-envelope" aria-hidden="true"></i><a href="mailto:hospitalveterinariodr.ceron@gmail.com">hospitalveterinariodr.ceron@gmail.com</a></li>
-                    <li><i class="fa fa-phone" aria-hidden="true"></i><a href="tel:+527561040064"> 756-104-0064 </a></li>
+                    <li><i class="fa fa-phone" aria-hidden="true"></i><a> 756-104-0064 </a></li>
                     <li><i class="fa fa-map-marker" aria-hidden="true"></i>
                         <p>Ubicados en Constitución 1403, El Dulce Nombre, 41100 Chilapa de Álvarez, Gro. </p>
                     </li>
@@ -35,7 +35,7 @@
                 <div class="col-xs-8">
                     <div class="social-links">
                         <a class="twitter-bg" href="#"><i class="fa fa-twitter"></i></a>
-                        <a class="facebook-bg" href="#"><i class="fa fa-facebook"></i></a>
+                        <a class="facebook-bg" href="https://www.facebook.com/veterinarioCeron"><i class="fa fa-facebook"></i></a>
                     </div><!-- /.social-links -->
                 </div>
                 <div class="col-xs-4">

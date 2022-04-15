@@ -33,7 +33,7 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <div class="modal-body">Si cierra la sesion tendra que ingresar el correo y contraseña para aceder de nuevo .</div>
+            <div class="modal-body">Si cierra la sesion tendra que ingresar el correo y contraseña para acceder de nuevo .</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
                 <a class="btn btn-primary" href="logout.php">Salir</a>
